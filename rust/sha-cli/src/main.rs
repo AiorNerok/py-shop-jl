@@ -25,29 +25,27 @@ fn main() {
 
     let start = Instant::now();
 
-    // let handle = thread::spawn(move || {
-        let mut count_find: usize = 0;
-        let mut count_iter: usize = 1;
-        let n = n.parse::<u8>().unwrap();
-        let f = f.parse::<u8>().unwrap().into();
+    let mut count_find: usize = 0;
+    let mut count_iter: usize = 1;
+    
+    let n = n.parse::<u8>().unwrap();
+    let f = f.parse::<u8>().unwrap().into();
 
-        let end_str = "0".repeat(n.into());
+    let end_str = "0".repeat(n.into());
 
-        loop {
-            let res = digest(count_iter.to_string());
+    loop {
+        let res = digest(count_iter.to_string());
 
-            if res.ends_with(&end_str) {
-                println!("{}, {}", count_iter, res);
-                count_find += 1
-            }
-
-            if count_find == f {
-                break;
-            }
-            count_iter += 1;
+        if res.ends_with(&end_str) {
+            println!("{}, {}", count_iter, res);
+            count_find += 1
         }
-    // });
-    // handle.join().unwrap();
+
+        if count_find == f {
+            break;
+        }
+        count_iter += 1;
+    }
 
     let duration = start.elapsed();
     println!("Time elapsed in expensive_function() is: {:?}", duration);
